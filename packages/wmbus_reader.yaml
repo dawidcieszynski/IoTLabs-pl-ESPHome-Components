@@ -1,0 +1,35 @@
+packages:
+  wmbus_reader_common: !include
+    file: wmbus_reader_common.yaml
+
+image:
+  - id: qr_code
+    file: https://github.com/IoTLabs-pl/wM-Bus-Gateway/blob/master/resources/qrcode.png?raw=true
+    type: binary
+    invert_alpha: True
+
+sensor:
+  - platform: uptime
+    type: timestamp
+    id: wmbus_reader_uptime
+    name: Uptime
+    disabled_by_default: True
+  - platform: wifi_signal
+    id: wmbus_reader_wifi_rssi
+    name: RSSI
+    update_interval: 60s
+    disabled_by_default: True
+  - platform: debug
+    free:
+      name: Free Heap
+      id: wmbus_reader_free_heap
+      device_class: data_size
+      disabled_by_default: True
+      state_class: measurement
+
+button:
+  - platform: restart
+    name: Restart
+
+debug:
+  update_interval: 15s
