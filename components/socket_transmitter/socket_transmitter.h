@@ -7,8 +7,6 @@
 #include "esphome/core/component.h"
 #include "esphome/components/socket/socket.h"
 
-#include "esphome/components/wmbus_radio/packet.h"
-
 namespace esphome
 {
     namespace socket_transmitter

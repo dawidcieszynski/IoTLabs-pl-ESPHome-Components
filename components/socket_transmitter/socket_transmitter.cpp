@@ -18,7 +18,6 @@ namespace esphome
         {
             ESP_LOGD(TAG, "Setting up socket transmitter");
             this->socket_ = socket::socket_ip(this->protocol, 0);
-            this->socket_->setblocking(false);
             int enable = 1;
             this->socket_->setsockopt(SOL_SOCKET, SO_REUSEADDR, &enable, sizeof(enable));
 
@@ -35,6 +34,7 @@ namespace esphome
             int n_bytes = this->socket_->write(data, length);
             if (n_bytes < 0)
                 ESP_LOGE(TAG, "Failed to send message");
+            this->socket_->close();
         }
 
         void SocketTransmitter::dump_config()
