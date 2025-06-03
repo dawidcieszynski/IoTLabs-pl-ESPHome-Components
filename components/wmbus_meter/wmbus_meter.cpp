@@ -8,39 +8,52 @@ namespace esphome
 
         void Meter::set_meter_params(std::string id, std::string driver, std::string key)
         {
-            this->id_ = id;
-            this->driver_ = driver;
-            this->key_ = key;
+            ESP_LOGW(TAG, "key %s", key.c_str());
 
-            ESP_LOGW(TAG, "key %s", this->key_.c_str());
+            MeterInfo meter_info;
+            meter_info.parse(driver + '-' + id, driver, id + ',', key);
 
-            this->create_meter(this->driver_);
+            this->meter = createMeter(&meter_info);
         }
 
         std::string Meter::get_id() const
         {
-            return this->id_;
+            if (!this->meter)
+                return "";
+            return this->meter->addressExpressions()[0].id;
         }
-
-        void Meter::create_meter(std::string driver)
+        MeterType Meter::get_type() const
         {
-            MeterInfo meter_info;
-            meter_info.parse(driver + '-' + this->id_, driver, this->id_ + ',', this->key_);
-
-            this->meter = createMeter(&meter_info);
+            if (!this->meter)
+                return MeterType::UnknownMeter;
+            return this->meter->driverInfo()->type();
         }
+        std::string Meter::get_driver_name() const
+        {
+            if (!this->meter)
+                return "";
+            return this->meter->driverName().str();
+        }
+        bool Meter::is_encrypted() const
+        {
+            return this->meter && this->meter->meterKeys()->hasConfidentialityKey();
+        }
+
+        
+
         void Meter::set_radio(wmbus_radio::Radio *radio)
         {
             this->radio = radio;
             radio->add_frame_handler([this](wmbus_radio::Frame *frame)
                                      { return this->handle_frame(frame); });
         }
+
         void Meter::dump_config()
         {
             ESP_LOGCONFIG(TAG, "wM-Bus Meter:");
-            ESP_LOGCONFIG(TAG, "  ID: %s", this->id_.c_str());
-            ESP_LOGCONFIG(TAG, "  Driver: %s", this->driver_.c_str());
-            ESP_LOGCONFIG(TAG, "  Key: %s", this->key_.empty() ? "not-encrypted" : "***");
+            ESP_LOGCONFIG(TAG, "  ID: %s", this->get_id().c_str());
+            ESP_LOGCONFIG(TAG, "  Driver: %s", this->get_driver_name().c_str());
+            ESP_LOGCONFIG(TAG, "  Key: %s", this->is_encrypted() ? "***" : "not-encrypted");
         }
 
         void Meter::handle_frame(wmbus_radio::Frame *frame)
