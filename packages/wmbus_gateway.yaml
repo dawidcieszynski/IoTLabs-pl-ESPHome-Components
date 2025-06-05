@@ -9,6 +9,8 @@ button:
 debug:
   update_interval: 15s
 
+api:
+
 time:
   - platform: homeassistant
 
