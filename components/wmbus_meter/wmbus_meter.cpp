@@ -8,8 +8,6 @@ namespace esphome
 
         void Meter::set_meter_params(std::string id, std::string driver, std::string key)
         {
-            ESP_LOGW(TAG, "key %s", key.c_str());
-
             MeterInfo meter_info;
             meter_info.parse(driver + '-' + id, driver, id + ',', key);
 
@@ -38,8 +36,6 @@ namespace esphome
         {
             return this->meter && this->meter->meterKeys()->hasConfidentialityKey();
         }
-
-        
 
         void Meter::set_radio(wmbus_radio::Radio *radio)
         {

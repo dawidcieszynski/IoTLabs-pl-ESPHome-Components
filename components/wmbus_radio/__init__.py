@@ -14,7 +14,7 @@ from esphome.const import (
 )
 from pathlib import Path
 
-CODEOWNERS = ["@SzczepanLeon", "@kubasaw"]
+CODEOWNERS = ["@kubasaw"]
 
 DEPENDENCIES = ["esp32", "spi"]
 

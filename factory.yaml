@@ -1,0 +1,61 @@
+packages: !include
+  file: packages/wmbus_gateway_core.yaml
+
+esphome:
+    name: wmbus-gateway
+    comment: wM-Bus Gateway for ESPHome
+    project:
+      name: IoTLabs.wM-Bus Gateway
+      version: 1.0.0
+
+improv_serial:
+
+esp32_improv:
+  authorizer: none
+
+wifi:
+
+api:
+
+captive_portal:
+
+dashboard_import:
+  package_import_url: github://IoTLabs-pl/wM-Bus-Gateway/factory.yaml@master
+  import_full_config: true
+
+web_server:
+  version: 3
+
+wmbus_radio:
+  on_frame:
+    - then:
+        - logger.log:
+            level: WARN
+            format: "Meter ID: %s"
+            args: ["frame->meter_id().c_str()"]
+        - logger.log:
+            level: WARN
+            format: "Frame: https://wmbusmeters.org/analyze/%s"
+            args: ["frame->as_hex().c_str()"]
+
+button:
+  - platform: restart
+    name: Restart
+
+debug:
+  update_interval: 15s
+
+sensor:
+  - platform: uptime
+    name: Uptime
+  - platform: wifi_signal
+    name: RSSI
+    update_interval: 60s
+  - platform: debug
+    free:
+      name: Free Heap
+      device_class: data_size
+      state_class: measurement
+
+
+

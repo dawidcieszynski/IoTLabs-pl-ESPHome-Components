@@ -15,15 +15,23 @@ CONF_BUTTON_ID = "button_id"
 CODEOWNERS = ["@kubasaw"]
 AUTO_LOAD = ["network"]
 
+REGISTERED_SENSORS = []
 
 CONFIG_SCHEMA = cv.Schema(
     {
         cv.GenerateID(CONF_ID): cv.declare_id(DisplayManager),
         cv.GenerateID(CONF_DISPLAY_ID): cv.use_id(SSD1306),
         cv.GenerateID(CONF_BUTTON_ID): cv.use_id(BinarySensor),
-        cv.Optional(CONF_PAGES, default=[]): [cv.use_id(BaseSensor)],
+        cv.Optional(CONF_PAGES, default=REGISTERED_SENSORS): [cv.use_id(BaseSensor)],
     }
 )
+
+
+def register_sensor_for_display(conf):
+    if CONF_ID in conf:
+        REGISTERED_SENSORS.append(conf[CONF_ID])
+    return conf
+
 
 async def to_code(config):
     cg.add_define("ESPHOME_PROJECT_NAME", "IoTLabs.wM-Bus Gateway")

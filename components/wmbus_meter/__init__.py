@@ -22,7 +22,7 @@ CONF_METER_ID = "meter_id"
 CONF_RADIO_ID = "radio_id"
 CONF_ON_TELEGRAM = "on_telegram"
 
-CODEOWNERS = ["@SzczepanLeon", "@kubasaw"]
+CODEOWNERS = ["@kubasaw"]
 
 DEPENDENCIES = ["wmbus_radio"]
 AUTO_LOAD = ["sensor", "text_sensor"]

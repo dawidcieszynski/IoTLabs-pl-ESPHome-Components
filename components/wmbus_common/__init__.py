@@ -4,7 +4,7 @@ from esphome.loader import get_component, ComponentManifest
 from esphome import codegen as cg
 from pathlib import Path
 
-CODEOWNERS = ["@SzczepanLeon", "@kubasaw"]
+CODEOWNERS = ["@kubasaw"]
 CONF_DRIVERS = "drivers"
 
 wmbus_common_ns = cg.esphome_ns.namespace("wmbus_common")

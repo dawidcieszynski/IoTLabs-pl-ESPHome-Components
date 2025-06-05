@@ -7,7 +7,7 @@ AUTO_LOAD = ["socket"]
 
 MULTI_CONF = True
 
-CODEOWNERS = ["@SzczepanLeon", "@kubasaw"]
+CODEOWNERS = ["@kubasaw"]
 
 
 socket_ns = cg.esphome_ns.namespace("socket_transmitter")
