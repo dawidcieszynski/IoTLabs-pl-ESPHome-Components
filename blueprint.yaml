@@ -9,6 +9,23 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
+wmbus_radio:
+  # This part of config is responsible for listening to any wM-Bus frames.
+  # The same part of config is present in the factory firmware. 
+  # Using links appear in the logs, you will be redirected to the wM-Bus Meters Analyzer
+  # allowing you inspect the received frames, identify proper driver, 
+  # check your decryption key and identify available fields in datagrams.
+  on_frame:
+    - then:
+        - logger.log:
+            level: WARN
+            format: "Meter ID: %s"
+            args: ["frame->meter_id().c_str()"]
+        - logger.log:
+            level: WARN
+            format: "Frame: https://wmbusmeters.org/analyze/%s"
+            args: ["frame->as_hex().c_str()"]
+
 wmbus_meter:
   # This part of config is responsible for handling the received frames
   # for the specified meter. You may send whole decoded datagram everywhere
