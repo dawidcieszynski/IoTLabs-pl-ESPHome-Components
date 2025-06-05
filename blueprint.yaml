@@ -15,7 +15,7 @@ wmbus_meter:
   # You may specify multiple meters.
   - id: my_meter
     meter_id: 123456789
-    driver: apator162
+    type: apator162
     key: SomeKey # Optional, if your meter is encrypted. May be specified as ASCII or HEX string.
     mode: C1 # C1 or T1 if you want to filter specific modes. When not specified, all modes are accepted.
     # on_telegram:
