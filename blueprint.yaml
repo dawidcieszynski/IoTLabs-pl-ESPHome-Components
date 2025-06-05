@@ -1,5 +1,5 @@
-packages: !include
-  file: github://IoTLabs-pl/wM-Bus-Gateway/packages/wmbus_gateway.yaml
+packages:
+  wmbus_gateway: github://IoTLabs-pl/wM-Bus-Gateway/packages/wmbus_gateway.yaml@master
 
 esphome:
   name: wmbus-gateway

@@ -1,7 +1,9 @@
 name: Build and store firmware
 on: 
-    - pull_request
-    - release
+    pull_request:
+    release:
+      types:
+        - published
 jobs:
   build_and_upload:
     runs-on: ubuntu-latest
