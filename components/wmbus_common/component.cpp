@@ -2,6 +2,7 @@
 
 #include "meters.h"
 
+#include "esphome/core/defines.h"
 #include "esphome/core/log.h"
 
 namespace esphome
