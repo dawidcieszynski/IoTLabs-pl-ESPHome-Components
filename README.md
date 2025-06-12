@@ -1,4 +1,4 @@
-# ESPHome Components hosted by IoTLabs
+# ESPHome Components
 
 This repository contains custom [ESPHome](https://esphome.io/) components for devices developed by IoTLabs.
 
