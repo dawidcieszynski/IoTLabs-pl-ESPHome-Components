@@ -95,7 +95,7 @@ async def to_code(config):
 
 
 with suppress(ImportError):
-    from ..socket_transmitter import (
+    from esphome.components.socket_transmitter import (
         SOCKET_SEND_ACTION_SCHEMA,
         SocketTransmitterSendAction,
     )

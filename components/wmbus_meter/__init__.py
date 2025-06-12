@@ -14,8 +14,8 @@ from esphome.components.mqtt import (
     MQTTPublishAction,
     mqtt_publish_action_to_code,
 )
-from ..wmbus_radio import RadioComponent
-from ..wmbus_common import validate_driver
+from esphome.components.wmbus_radio import RadioComponent
+from esphome.components.wmbus_common import validate_driver
 
 CONF_METER_ID = "meter_id"
 CONF_RADIO_ID = "radio_id"
