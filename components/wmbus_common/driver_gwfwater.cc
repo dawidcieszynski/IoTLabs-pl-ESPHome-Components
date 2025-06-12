@@ -66,7 +66,7 @@ namespace
 
     void Driver::processContent(Telegram *t)
     {
-        vector<uchar> bytes;
+        std::vector<uchar> bytes;
         t->extractMfctData(&bytes); // Extract raw frame data after the DIF 0x0F.
 
         if (bytes.size() < 3) return;
@@ -81,7 +81,7 @@ namespace
             return;
         }
 
-        string info;
+        std::string info;
 
         if (a & 0x02) info += "CONTINUOUS_FLOW ";
         if (a & 0x08) info += "BROKEN_PIPE ";

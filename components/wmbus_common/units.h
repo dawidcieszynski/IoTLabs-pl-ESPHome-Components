@@ -239,7 +239,7 @@ struct SIUnit
         quantity_(q), scale_(scale), exponents_(exponents) {}
     // Transform a named unit into an SIUnit.
     SIUnit(Unit);
-    // Parse string like: 3.6E106*kg*m^2*s^-3*a^−1 (ie volt)
+    // Parse std::string like: 3.6E106*kg*m^2*s^-3*a^−1 (ie volt)
     SIUnit(std::string s);
     // Return the known unit that best matches the SIUnit, or Unit::Unknown if none.
     Unit asUnit() const ;
@@ -251,9 +251,9 @@ struct SIUnit
     double scale() const { return scale_; }
     // Get the exponents.
     const SIExp &exp() const { return exponents_; }
-    // Return a string like 3.6⁶s⁻²m²kg
+    // Return a std::string like 3.6⁶s⁻²m²kg
     std::string str() const;
-    // Return a detailed string like: kwh[3.6⁶s⁻²m²kg]Energy
+    // Return a detailed std::string like: kwh[3.6⁶s⁻²m²kg]Energy
     std::string info() const;
     // Check if the exponents (ie units) are the same.
     bool sameExponents(SIUnit &to_siunit) const { return exponents_ == to_siunit.exponents_; }

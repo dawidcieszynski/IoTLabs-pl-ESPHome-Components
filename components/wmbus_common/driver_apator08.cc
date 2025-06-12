@@ -54,19 +54,19 @@ namespace
         // The telegram says gas (0x03) but it is a water meter.... so fix this.
         t->dll_type = 0x07;
 
-        vector<uchar> content;
+        std::vector<uchar> content;
         t->extractPayload(&content);
 
         if (content.size() < 4) return;
 
-        map<string,pair<int,DVEntry>> vendor_values;
+        std::map<std::string,std::pair<int,DVEntry>> vendor_values;
 
-        string total;
+        std::string total;
         strprintf(&total, "%02x%02x%02x%02x", content[0], content[1], content[2], content[3]);
 
         vendor_values["0413"] = { 25, DVEntry(25, DifVifKey("0413"), MeasurementType::Instantaneous, 0x13, {}, {}, 0, 0, 0, total) };
         int offset;
-        string key;
+        std::string key;
         if(findKey(MeasurementType::Instantaneous, VIFRange::Volume, 0, 0, &key, &vendor_values))
         {
             double total_water_consumption_m3 {};

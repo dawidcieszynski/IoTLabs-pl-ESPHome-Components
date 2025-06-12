@@ -1,0 +1,17 @@
+name: Compilation check
+on: 
+    pull_request:
+
+jobs:
+  build_and_upload:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Build firmware
+        id: build_firmware
+        uses: esphome/build-action@v7
+        with:
+          yaml-file: test.yaml
+
+

@@ -157,7 +157,7 @@ namespace
     void Driver::processContent(Telegram *t) {
         auto it = t->dv_entries.find("0779");
         if (it != t->dv_entries.end()) {
-            vector<uchar> v;
+            std::vector<uchar> v;
             auto entry = it->second.second;
             hex2bin(entry.value.substr(0, 8), &v);
             // FIXME PROBLEM

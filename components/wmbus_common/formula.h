@@ -41,7 +41,7 @@ struct Formula
     virtual double calculate(Unit to, DVEntry *dve = NULL, Meter *m = NULL) = 0;
     // Clear the formula, ie drop any parsed tree.
     virtual void clear() = 0;
-    // Return a regenerated formula string.
+    // Return a regenerated formula std::string.
     virtual std::string str() = 0;
     // Return the formula in a format where the tree structure is explicit.
     virtual std::string tree() = 0;

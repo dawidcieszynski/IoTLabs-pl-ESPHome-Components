@@ -69,9 +69,9 @@ namespace Translate
     enum class MapType
     {
         Unknown,
-        BitToString, // A bit translates to a text string.
-        IndexToString, // A masked set of bits (a number) translates to a lookup index with text strings.
-        DecimalsToString // Numbers are successively subtracted from input, each successfull subtraction translate into a text string.
+        BitToString, // A bit translates to a text std::string.
+        IndexToString, // A masked set of bits (a number) translates to a lookup index with text std::strings.
+        DecimalsToString // Numbers are successively subtracted from input, each successfull subtraction translate into a text std::string.
     };
 
     struct Map

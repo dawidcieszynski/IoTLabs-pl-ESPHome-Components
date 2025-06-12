@@ -131,7 +131,7 @@ with suppress(ImportError):
             action_id, cg.TemplateArguments(output_type, *template_arg), paren
         )
         template_ = LambdaExpression(
-            f"return frame.as_{config[CONF_FORMAT]}();", args, ""
+            f"return frame->as_{config[CONF_FORMAT]}();", args, ""
         )
 
         cg.add(var.set_data(template_))

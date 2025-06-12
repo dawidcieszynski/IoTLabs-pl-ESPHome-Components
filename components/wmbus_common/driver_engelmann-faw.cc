@@ -86,7 +86,7 @@ namespace
 
         for (int i=2; i<=16; ++i)
         {
-            string name, info;
+            std::string name, info;
             strprintf(&name, "consumption_%d_months_ago", i-1);
             strprintf(&info, "Water consumption %d month(s) ago.", i-1);
 

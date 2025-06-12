@@ -6,7 +6,7 @@
 This is an implementation of the AES algorithm, specifically ECB and CBC mode.
 Block size can be chosen in aes.h - available choices are AES128, AES192, AES256.
 
-The implementation is verified against the test vectors in:
+The implementation is verified against the test std::vectors in:
   National Institute of Standards and Technology Special Publication 800-38A 2001 ED
 
 ECB-AES128
@@ -29,7 +29,7 @@ ECB-AES128
 
 
 NOTE:   String length must be evenly divisible by 16byte (str_len % 16 == 0)
-        You should pad the end of the string with zeros if this is not the case.
+        You should pad the end of the std::string with zeros if this is not the case.
         For AES192/256 the block size is proportionally larger.
 
 */

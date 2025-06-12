@@ -17,8 +17,6 @@
 
 #include"meters_common_implementation.h"
 
-using namespace std;
-
 struct MeterUnknown : public virtual MeterCommonImplementation
 {
     MeterUnknown(MeterInfo &mi, DriverInfo &di);

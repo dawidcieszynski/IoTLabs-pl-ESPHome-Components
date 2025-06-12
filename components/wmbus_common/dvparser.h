@@ -402,7 +402,7 @@ struct FieldMatcher
     // If not actually used, this remains false.
     bool active = false;
 
-    // Exact difvif hex string matching all other checks are ignored.
+    // Exact difvif hex std::string matching all other checks are ignored.
     bool match_dif_vif_key = false;
     DifVifKey dif_vif_key { "" };
 
@@ -571,13 +571,13 @@ bool extractDVlong(std::map<std::string,std::pair<int,DVEntry>> *values,
                    int *offset,
                    uint64_t *value);
 
-// Just copy the raw hex data into the string, not reversed or anything.
+// Just copy the raw hex data into the std::string, not reversed or anything.
 bool extractDVHexString(std::map<std::string,std::pair<int,DVEntry>> *values,
                         std::string key,
                         int *offset,
                         std::string *value);
 
-// Read the content and attempt to reverse and transform it into a readble string
+// Read the content and attempt to reverse and transform it into a readble std::string
 // based on the dif information.
 bool extractDVReadableString(std::map<std::string,std::pair<int,DVEntry>> *values,
                              std::string key,

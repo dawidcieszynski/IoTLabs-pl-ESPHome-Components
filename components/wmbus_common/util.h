@@ -43,19 +43,19 @@ enum class TestBit
 uchar bcd2bin(uchar c);
 uchar revbcd2bin(uchar c);
 uchar reverse(uchar c);
-// A BCD string 102030405060 is reversed to 605040302010
+// A BCD std::string 102030405060 is reversed to 605040302010
 std::string reverseBCD(const std::string &v);
-// A hex string encoding ascii chars is reversed and safely translated into a readble string.
+// A hex std::string encoding ascii chars is reversed and safely translated into a readble std::string.
 std::string reverseBinaryAsciiSafeToString(const std::string &v);
-// Check if hex string is likely to be ascii
+// Check if hex std::string is likely to be ascii
 bool isLikelyAscii(const std::string &v);
 
 bool isHexChar(uchar c);
 
-// Flex strings contain hexadecimal digits and permit # | and whitespace.
+// Flex std::strings contain hexadecimal digits and permit # | and whitespace.
 bool isHexStringFlex(const char *txt, bool *invalid);
 bool isHexStringFlex(const std::string &txt, bool *invalid);
-// Strict strings contain only hexadecimal digits.
+// Strict std::strings contain only hexadecimal digits.
 bool isHexStringStrict(const char *txt, bool *invalid);
 bool isHexStringStrict(const std::string &txt, bool *invalid);
 int char2int(char input);
@@ -117,11 +117,11 @@ bool isValidAlias(const std::string &alias);
 
 bool isNumber(const std::string &fq);
 
-// Split s into strings separated by c.
+// Split s into std::strings separated by c.
 std::vector<std::string> splitString(const std::string &s, char c);
-// Split s into strings separated by c and store inte set.
+// Split s into std::strings separated by c and store inte set.
 std::set<std::string> splitStringIntoSet(const std::string &s, char c);
-// Split device string cul:c1:CMD(bar 1:2) into cul c1 CMD(bar 1:2)
+// Split device std::string cul:c1:CMD(bar 1:2) into cul c1 CMD(bar 1:2)
 // I.e. the : colon inside CMD is not used for splitting.
 std::vector<std::string> splitDeviceString(const std::string &s);
 
@@ -132,7 +132,7 @@ std::string eatTo(std::vector<uchar> &v, std::vector<uchar>::iterator &i, int c,
 void padWithZeroesTo(std::vector<uchar> *content, size_t len, std::vector<uchar> *full_content);
 std::string padLeft(const std::string &input, int width);
 
-// Parse text string into seconds, 5h = (3600*5) 2m = (60*2) 1s = 1
+// Parse text std::string into seconds, 5h = (3600*5) 2m = (60*2) 1s = 1
 int parseTime(const std::string &time);
 
 // Test if current time is inside any of the specified periods.
@@ -152,14 +152,14 @@ void addSlipFraming(std::vector<uchar> &from, std::vector<uchar> &to);
 // Frame length is set to zero if no frame was found.
 void removeSlipFraming(std::vector<uchar> &from, size_t *frame_length, std::vector<uchar> &to);
 
-// Eat characters from the vector v, iterating using i, until the end char c is found.
+// Eat characters from the std::vector v, iterating using i, until the end char c is found.
 // If end char == -1, then do not expect any end char, get all until eof.
 // If the end char is not found, return error.
 // If the maximum length is reached without finding the end char, return error.
 std::string eatTo(std::vector<char> &v, std::vector<char>::iterator &i, int c, size_t max, bool *eof, bool *err);
 // Eat whitespace (space and tab, not end of lines).
 void eatWhitespace(std::vector<char> &v, std::vector<char>::iterator &i, bool *eof);
-// First eat whitespace, then start eating until c is found or eof. The found string is trimmed from beginning and ending whitespace.
+// First eat whitespace, then start eating until c is found or eof. The found std::string is trimmed from beginning and ending whitespace.
 std::string eatToSkipWhitespace(std::vector<char> &v, std::vector<char>::iterator &i, int c, size_t max, bool *eof, bool *err);
 // Remove leading and trailing white space
 void trimWhitespace(std::string *s);
@@ -220,25 +220,25 @@ enum class OutputFormat
     HTML
 };
 
-// Joing two status strings with a space, but merge OKs.
+// Joing two status std::strings with a space, but merge OKs.
 // I.e. "OK" + "OK" --> "OK"
 //      "ERROR" + "OK"  --> "ERROR"
 //      "OK" + "ERROR FLOW" --> "ERROR FLOW"
 //      "ERROR" + "FLOW"    --> "ERROR FLOW"
-//      It also translates empty strings into OK.
+//      It also translates empty std::strings into OK.
 //      "" + "OK" --> "OK"
 //      "" + "" --> "OK"
 std::string joinStatusOKStrings(const std::string &a, const std::string &b);
 
-// Same but do not introduce OK, keep empty strings empty.
+// Same but do not introduce OK, keep empty std::strings empty.
 std::string joinStatusEmptyStrings(const std::string &a, const std::string &b);
 
-// Sort the words in a status string: "GAMMA BETA ALFA" --> "ALFA BETA GAMMA"
+// Sort the words in a status std::string: "GAMMA BETA ALFA" --> "ALFA BETA GAMMA"
 // Also identical flags are merged: "BETA ALFA ALFA" --> "ALFA BETA"
 // Finally ~ is replaced with a space, this is only used for backwards compatibilty for deprecated fields.
 std::string sortStatusString(const std::string &a);
 
-// If a vector is empty, then there will be an assert (with some compiler flags) if we use &v[0]
+// If a std::vector is empty, then there will be an assert (with some compiler flags) if we use &v[0]
 // even if we do not intend to actually use the pointer to uchars!
 // So provide safeVectorPtr which will return NULL instead of assert-crashing.
 uchar *safeButUnsafeVectorPtr(std::vector<uchar> &v);
