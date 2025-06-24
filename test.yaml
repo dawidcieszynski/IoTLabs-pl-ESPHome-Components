@@ -45,7 +45,7 @@ wmbus_radio:
 
 wmbus_meter:
   id: test_meter
-  meter_id: "12345678"
+  meter_id: 012abcd
   type: apator162
   on_telegram:
     - wmbus_meter.send_telegram_with_mqtt:
