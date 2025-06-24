@@ -1,21 +1,21 @@
-import esphome.config_validation as cv
 import esphome.codegen as cg
-from esphome.const import (
-    CONF_ID,
-    CONF_TYPE,
-    CONF_KEY,
-    CONF_PAYLOAD,
-    CONF_TRIGGER_ID,
-    CONF_MODE,
-)
+import esphome.config_validation as cv
 from esphome import automation
 from esphome.components.mqtt import (
     MQTT_PUBLISH_ACTION_SCHEMA,
     MQTTPublishAction,
     mqtt_publish_action_to_code,
 )
-from esphome.components.wmbus_radio import RadioComponent
 from esphome.components.wmbus_common import validate_driver
+from esphome.components.wmbus_radio import RadioComponent
+from esphome.const import (
+    CONF_ID,
+    CONF_KEY,
+    CONF_MODE,
+    CONF_PAYLOAD,
+    CONF_TRIGGER_ID,
+    CONF_TYPE,
+)
 
 CONF_METER_ID = "meter_id"
 CONF_RADIO_ID = "radio_id"
@@ -47,15 +47,25 @@ def hex_key_validator(key):
         raise cv.Invalid(e.msg.replace("Bind key", "Key"))
 
 
+def meter_id_validator(meter_id):
+    meter_id = cv.string(meter_id).lower().removeprefix("0x")
+    meter_id = cv.Length(1, 8)(meter_id)
+
+    try:
+        value = int(meter_id, 16)
+    except ValueError:
+        raise cv.Invalid("Meter ID must be a valid hexadecimal string")
+    if value < 0:
+        raise cv.Invalid("Meter ID must be a positive hexadecimal integer")
+
+    return f"{value:08x}"
+
+
 CONFIG_SCHEMA = cv.Schema(
     {
         cv.GenerateID(): cv.declare_id(Meter),
         cv.GenerateID(CONF_RADIO_ID): cv.use_id(RadioComponent),
-        cv.Required(CONF_METER_ID): cv.All(
-            cv.int_,
-            lambda x: str(x).zfill(8),
-            cv.Length(max=8),
-        ),
+        cv.Required(CONF_METER_ID): meter_id_validator,
         cv.Required(CONF_TYPE): validate_driver,
         cv.Optional(CONF_KEY): cv.Any(
             cv.All(cv.string_strict, lambda s: s.encode().hex(), hex_key_validator),
