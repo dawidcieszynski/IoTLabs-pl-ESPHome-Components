@@ -20,7 +20,7 @@ namespace esphome
                 auto byte = this->read();
                 if (byte.has_value())
                     *buffer++ = *byte;
-                else if (!ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(1)))
+                else if (!ulTaskNotifyTake(pdTRUE, pdMS_TO_TICKS(5)))
                     return false;
                 else
                     wait_count++;
