@@ -118,11 +118,12 @@ namespace
         // std::string season_start_date = dateToString(season_start_date_lo, season_start_date_hi);
         // setStringValue("season_start_date", season_start_date, NULL);
 
-        // Previous season total allocation
-        uchar prev_lo = content[4];
-        uchar prev_hi = content[5];
-        double previous_hca = (256.0*prev_hi+prev_lo);
-        setNumericValue("previous", Unit::HCA, previous_hca);
+        // // Previous season total allocation
+        // uchar prev_lo = content[4];
+        // uchar prev_hi = content[5];
+        // double previous_hca = (256.0*prev_hi+prev_lo);
+        // setNumericValue("previous", Unit::HCA, previous_hca);
+        // setNumericValue("previous", Unit::HCA, previous_hca);
 
         // // Electronic seal break date
         // uchar esb_date_lo = content[6];
@@ -131,10 +132,11 @@ namespace
         // setStringValue("esb_date", esb_date, NULL);
 
         // Current season allocation
-        uchar curr_lo = content[9];
-        uchar curr_hi = content[10];
-        double current_hca = (256.0*curr_hi+curr_lo);
-        setNumericValue("current", Unit::HCA, current_hca);
+        // uchar curr_lo = content[9];
+        // uchar curr_hi = content[10];
+        // double current_hca = (256.0*curr_hi+curr_lo);
+        // setNumericValue("current", Unit::HCA, current_hca);
+        setNumericValue("current", Unit::HCA, 0.1);
 
         // Current date reported by meter
         // uchar date_curr_lo = content[10];
@@ -143,10 +145,10 @@ namespace
         // setStringValue("current_date", current_date, NULL);
 
         // Previous season average temperature
-        double temp_room_prev_avg_frac = content[41];
-        double temp_room_prev_avg_deg = content[42];
-        double temp_room_prev_avg = temp_room_prev_avg_deg + temp_room_prev_avg_frac/256.0;
-        setNumericValue("temp_room_prev_avg", Unit::C, temp_room_prev_avg);
+        // double temp_room_prev_avg_frac = content[41];
+        // double temp_room_prev_avg_deg = content[42];
+        // double temp_room_prev_avg = temp_room_prev_avg_deg + temp_room_prev_avg_frac/256.0;
+        // setNumericValue("temp_room_prev_avg", Unit::C, temp_room_prev_avg);
 
         // Current season average temperature
         // double temp_room_avg_frac = content[14];
